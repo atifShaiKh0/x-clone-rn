@@ -5,6 +5,7 @@ import { Alert } from "react-native";
 export const useSocialAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { startSSOFlow } = useSSO();
+  console.log("Authentication Hook Rendered")
 
   const handleSocialAuth = async (strategy: "oauth_google" | "oauth_apple") => {
     setIsLoading(true);
@@ -12,6 +13,8 @@ export const useSocialAuth = () => {
       const { createdSessionId, setActive } = await startSSOFlow({ strategy });
       if (createdSessionId && setActive) {
         await setActive({ session: createdSessionId });
+        console.log("Sign in Done: OK Report");
+
       }
     } catch (err) {
       console.log("Error in social auth", err);
